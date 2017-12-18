@@ -17,10 +17,11 @@ public:
 
 	int32 GetMaxTries()   const;
 	int32 GetCurrentTry() const;
+	int32 GetHiddenWordLength() const;
 	bool IsGameWon()    const;
+	bool CheckGuessValidity(FString Guess) const; //make a more rich return value
 
-	void Reset(); //TODO make a more rich return value.
-	bool CheckGuessValidity(FString Guess); //make a more rich return value
+	void Reset(); //TODO make a more rich return value
 	FBullCowCount SubmitGuess(FString Guess);
 
 private:
