@@ -1,0 +1,5 @@
+﻿Inputs: a word, preferably an isogram
+Outputs: bulls and cows, also if the input is incorrect - ask to enter again
+User tasks: determine the hidden isogram within max tries, enter the word
+Performance limits: none
+Assets we need: bull and a cow ascii art, prompts for user input, game output
