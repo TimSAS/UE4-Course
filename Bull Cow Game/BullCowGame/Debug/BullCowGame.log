@@ -1,2 +1,3 @@
-﻿  FBullCowGame.cpp
+﻿  main.cpp
+c:\users\abram\desktop\ue4 course\bull cow game\bullcowgame\main.cpp(80): warning C4715: 'GetValidGuess': not all control paths return a value
   BullCowGame.vcxproj -> C:\Users\Abram\Desktop\UE4 Course\Bull Cow Game\Debug\BullCowGame.exe
