@@ -31,10 +31,11 @@ public:
 	EGuessStatus CheckGuessValidity(FString Guess) const; 
 
 	void Reset(); //TODO make a more rich return value
-	FBullCowCount SubmitGuess(FString Guess);
+	FBullCowCount SubmitValidGuess(FString Guess);
 
 private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };
