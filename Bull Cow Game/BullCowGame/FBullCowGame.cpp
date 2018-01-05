@@ -1,21 +1,26 @@
+#pragma once
+
 #include "FBullCowGame.h"
 #include <map>
-#define TMap std::map
 
+//Unreal-friendly syntax
+#define TMap std::map
 using int32 = int;
 
-FBullCowGame::FBullCowGame(){ Reset(); }
+FBullCowGame::FBullCowGame(){ Reset(); } 
 
-int32 FBullCowGame::GetMaxTries()   const{ return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const{ return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const{ return MyHiddenWord.length(); }
+int32 FBullCowGame::GetMaxTries()   const 
+{
+	TMap<int32, int32> WordLengthToMaxTries{ {3, 4}, {4, 7}, {5, 10}, {6, 15}, {7, 20} };
+	return WordLengthToMaxTries[MyHiddenWord.length()];
+}
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 5;
-	const FString HIDEN_WORD = "planet";
-	
+	const FString HIDEN_WORD = "pla"; //this MUST be an isogram
 	MyHiddenWord = HIDEN_WORD;
-	MyMaxTries = MAX_TRIES;
+
 	MyCurrentTry = 1;
 	bGameIsWon = false;
 	return;
@@ -31,7 +36,7 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 		return EGuessStatus::Not_Isogram;
 	}
 	//if the guess isn't all lowercase, return an error 
-	else if (false) 
+	else if (!IsLowercase(Guess)) 
 	{ 
 		return EGuessStatus::Not_Lowercase; //TODO write function
 	}
@@ -47,9 +52,10 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 	}
 }
 
-//receives a valid guess, increments turn, and returns count
+
 FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
+	//receives a valid guess, increments turn, and returns count
 	MyCurrentTry++;
 	FBullCowCount BullCowCount;
 	int32 WordLength = MyHiddenWord.length(); //assuming same length as guess
@@ -80,16 +86,39 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 
 	return BullCowCount;
 }
-
 bool FBullCowGame::IsIsogram(FString Word) const
 {
 	// treat 0 and 1 letter words as isograms
+	if (Word.length() <= 1) { return true; }
+
+	//setup our map
+	TMap<char, bool> LetterSeen;
 
 	//loop through the letters of the word, one by one
-		//if the letter is in the TMap
-			//it's not an isogram
-		//otherwise
-			//add the letter to the map as seen
+	for (auto Letter : Word)   //for all letters of the word
+	{
+		Letter = tolower(Letter); //handle mixed case
+
+		//if the letter is in the TMap, it's not an Isogram:
+		if (LetterSeen[Letter]) { return false; }
+		//otherwise, add the letter to the map as seen: 
+		else { LetterSeen[Letter] = true; }
+	}
+	
 
 	return true; // for example in cases where /0 is entered
+}
+bool FBullCowGame::IsLowercase(FString Word) const
+{
+	//check for 0-length, "\0" and spaces
+	if (Word.length() == 0) { return true; }
+
+	//loop through all the letters
+	for (auto Letter : Word)
+	{
+		if (!islower(Letter)) { return false; }
+	}
+
+	//if every letter is lowercase:
+	return true;
 }
