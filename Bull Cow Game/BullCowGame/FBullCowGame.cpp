@@ -18,7 +18,7 @@ int32 FBullCowGame::GetMaxTries()   const
 }
 void FBullCowGame::Reset()
 {
-	const FString HIDEN_WORD = "pla"; //this MUST be an isogram
+	const FString HIDEN_WORD = "planet"; //this MUST be an isogram
 	MyHiddenWord = HIDEN_WORD;
 
 	MyCurrentTry = 1;
