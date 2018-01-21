@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "Runtime/Engine/Public/DrawDebugHelpers.h"
+#include "Engine/World.h"
 #include "Grabber.generated.h"
 
 
