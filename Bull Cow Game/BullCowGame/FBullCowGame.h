@@ -3,6 +3,7 @@ The game is a simple guess the word game based on Mastermind*/
 
 #pragma once
 #include <string>
+#include <map>
 
 //to make syntax Unreal-friendly
 using FString = std::string;

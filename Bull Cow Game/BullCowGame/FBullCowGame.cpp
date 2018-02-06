@@ -1,7 +1,6 @@
 #pragma once
 
 #include "FBullCowGame.h"
-#include <map>
 
 //Unreal-friendly syntax
 #define TMap std::map
